@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>بيت الشواء | قائمة الطعام الرقمية الفاخرة</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#d4af37">
+  
+  <!-- Font Integrations -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            gold: {
+              50: '#faf7ed',
+              100: '#f2eabf',
+              200: '#eade8c',
+              300: '#decb54',
+              400: '#d2b426',
+              500: '#c59b27', // Signature Gold
+              600: '#a2781d',
+              700: '#7c5417',
+              800: '#5c3b14',
+              900: '#4c2e12',
+              accent: '#d4af37'
+            },
+            luxury: {
+              black: '#070707',
+              dark: '#0d0d0d',
+              charcoal: '#161616',
+              card: '#202020',
+              border: '#332918', // Subtle gold/bronze border
+              light: '#fbfbfb',
+              glow: 'rgba(212, 175, 55, 0.15)'
+            }
+          },
+          fontFamily: {
+            cairo: ['Cairo', 'sans-serif'],
+            playfair: ['Playfair Display', 'serif'],
+            amiri: ['Amiri', 'serif']
+          },
+          boxShadow: {
+            'gold-glow': '0 0 20px rgba(212, 175, 55, 0.25)',
+            'gold-border': '0 0 2px rgba(212, 175, 55, 0.4)',
+            'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- QRCode Library -->
+  <script src="https://unpkg.com/qrcode-generator@1.4.4/qrcode.js"></script>
+
+  <style>
+    /* Premium custom scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #070707;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #c59b27;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #a2781d;
+    }
+
+    /* Cinematic lighting/glow animations */
+    .glow-dot {
+      filter: blur(120px);
+    }
+
+    .glassmorphism {
+      background: rgba(22, 22, 22, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(212, 175, 55, 0.08);
+    }
+    
+    .glass-light {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* Floating anims */
+    @keyframes slow-float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(1deg); }
+    }
+    .float-slow {
+      animation: slow-float 8s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="bg-luxury-black text-white font-cairo overflow-x-hidden selection:bg-gold-500 selection:text-black">
+
+  <!-- Cinematic Background Glows -->
+  <div class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 overflow-hidden">
+    <div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-gold-600/10 rounded-full glow-dot float-slow"></div>
+    <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-gold-700/10 rounded-full glow-dot float-slow" style="animation-delay: -4s;"></div>
+  </div>
+
+  <!-- Luxury Loading Page -->
+  <div id="loader" class="fixed inset-0 bg-luxury-black z-50 flex flex-col justify-center items-center transition-all duration-1000 ease-in-out">
+    <div class="relative flex flex-col items-center">
+      <!-- Outer Rotating Gold Ring -->
+      <div class="w-24 h-24 border-2 border-dashed border-gold-500/20 rounded-full animate-spin duration-10000"></div>
+      <!-- Inner Glowing Logo -->
+      <div class="absolute inset-0 flex items-center justify-center">
+        <span class="font-cairo text-3xl font-bold tracking-widest text-gold-500 animate-pulse">شواء</span>
+      </div>
+      <h1 class="mt-8 font-cairo text-xl tracking-widest text-gold-500">بيت الشواء</h1>
+      <p class="text-xs text-stone-500 tracking-[0.2em] uppercase mt-2">Fine Dining Gastronomy</p>
+      <div class="w-16 h-[1px] bg-gradient-to-r from-transparent via-gold-500 to-transparent mt-4"></div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="fixed top-0 left-0 w-full z-40 transition-all duration-500" id="main-header">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-3 group">
+        <span class="font-cairo text-2xl font-bold text-gold-500 border border-gold-500/30 px-3 py-1 rounded transition-colors group-hover:bg-gold-500 group-hover:text-black">بيت الشواء</span>
+        <div class="hidden sm:block">
+          <div class="text-xs tracking-widest text-gold-500 font-cairo uppercase">بيت الشواء</div>
+          <div class="text-[9px] text-stone-500 tracking-[0.1em]">HIGH GASTRONOMY</div>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="hidden lg:flex items-center gap-8 text-sm tracking-wider text-stone-300 font-medium">
+        <a href="#hero" class="hover:text-gold-500 transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-gold-500 hover:after:w-full after:transition-all">الرئيسية</a>
+        <a href="#menu" class="hover:text-gold-500 transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-gold-500 hover:after:w-full after:transition-all">قائمة الطعام</a>
+        <a href="#offers" class="hover:text-gold-500 transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-gold-500 hover:after:w-full after:transition-all">العروض الخاصة</a>
+        <a href="#gallery" class="hover:text-gold-500 transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-gold-500 hover:after:w-full after:transition-all">معرض الصور</a>
+        <a href="#reservations" class="hover:text-gold-500 transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-gold-500 hover:after:w-full after:transition-all">الحجوزات</a>
+        <a href="#location" class="hover:text-gold-500 transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-gold-500 hover:after:w-full after:transition-all">موقعنا</a>
+        <a href="#contact" class="hover:text-gold-500 transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-gold-500 hover:after:w-full after:transition-all">تواصل معنا</a>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-4">
+        <!-- QR Trigger Button -->
+        <button id="qr-trigger-btn" class="p-2 border border-gold-500/20 text-gold-500 rounded-full hover:bg-gold-500 hover:text-black transition-colors" title="رمز القائمة">
+          <i data-lucide="qr-code" class="w-5 h-5"></i>
+        </button>
+
+        <!-- Cart Floating Button (Glassmorphic) -->
+        <button id="cart-trigger-btn" class="relative px-4 py-2 flex items-center gap-2 border border-gold-500/30 rounded-full bg-luxury-charcoal/60 text-white hover:border-gold-500 hover:shadow-gold-glow transition-all duration-300">
+          <i data-lucide="shopping-bag" class="w-4 h-4 text-gold-500"></i>
+          <span class="hidden md:inline text-xs font-semibold">السلة</span>
+          <span id="cart-badge" class="bg-gold-500 text-black text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+        </button>
+
+        <!-- Reservation Header Button -->
+        <a href="#reservations" class="hidden md:inline-flex px-6 py-2 bg-gradient-to-r from-gold-600 to-gold-500 text-black text-xs font-bold tracking-widest rounded-full uppercase hover:shadow-gold-glow transform hover:-translate-y-0.5 transition-all duration-300">
+          احجز طاولتك
+        </a>
+
+        <!-- Mobile Menu Trigger -->
+        <button id="mobile-menu-btn" class="lg:hidden p-2 text-stone-300 hover:text-gold-500 transition-colors">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-nav-menu" class="hidden fixed inset-0 bg-luxury-black/95 z-50 flex flex-col justify-center items-center gap-8 text-xl font-medium transition-all duration-300">
+      <button id="mobile-close-btn" class="absolute top-6 left-6 p-2 text-stone-400 hover:text-gold-500">
+        <i data-lucide="x" class="w-8 h-8"></i>
+      </button>
+      <a href="#hero" class="mobile-nav-link hover:text-gold-500 transition-colors">الرئيسية</a>
+      <a href="#menu" class="mobile-nav-link hover:text-gold-500 transition-colors">قائمة الطعام</a>
+      <a href="#offers" class="mobile-nav-link hover:text-gold-500 transition-colors">العروض الخاصة</a>
+      <a href="#gallery" class="mobile-nav-link hover:text-gold-500 transition-colors">معرض الصور</a>
+      <a href="#reservations" class="mobile-nav-link hover:text-gold-500 transition-colors">الحجوزات</a>
+      <a href="#location" class="mobile-nav-link hover:text-gold-500 transition-colors">موقعنا</a>
+      <a href="#contact" class="mobile-nav-link hover:text-gold-500 transition-colors">تواصل معنا</a>
+      <a href="#reservations" class="mt-4 px-8 py-3 bg-gold-500 text-black font-bold text-sm rounded-full tracking-wider hover:shadow-gold-glow">
+        احجز طاولتك
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden">
+    <!-- Hero Image Background with Cinematic Overlays -->
+    <div class="absolute inset-0 z-0">
+      <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1920&q=80" alt="Signature Dish" class="w-full h-full object-cover object-center filter brightness-50 contrast-125 scale-105 animate-[scale-slow_30s_infinite_alternate]">
+      <div class="absolute inset-0 bg-gradient-to-t from-luxury-black via-luxury-black/60 to-transparent"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-luxury-black/80 via-transparent to-transparent"></div>
+      <div class="absolute inset-0 bg-radial-gradient"></div>
+    </div>
+
+    <!-- Hero Content -->
+    <div class="relative z-10 max-w-5xl mx-auto px-6 text-center mt-12 flex flex-col items-center">
+      <!-- Signature Tag -->
+      <span class="inline-block px-4 py-1.5 border border-gold-500/30 rounded-full bg-luxury-charcoal/50 text-gold-500 text-xs font-semibold tracking-widest uppercase mb-6 animate-fade-in-up">
+        تجربة طهي حائزة على نجمة ميشلان
+      </span>
+
+      <!-- Main Heading -->
+      <h1 class="text-4xl sm:text-6xl md:text-7xl font-amiri font-bold tracking-wide leading-tight text-white mb-6">
+        رحلة فريدة في عالم <span class="text-transparent bg-clip-text bg-gradient-to-l from-gold-300 via-gold-500 to-gold-700">المذاق الراقي</span>
+      </h1>
+
+      <!-- Slogan -->
+      <p class="text-stone-300 text-base sm:text-xl font-light max-w-2xl mx-auto leading-relaxed mb-8">
+        نبتكر أطباقاً ساحرة تجمع بين المكونات النادرة والتقنيات العصرية لنصنع لك ذكرى عشاء لا تُنسى في أجواءٍ من الفخامة اللامتناهية.
+      </p>
+
+      <!-- Reservation and Call To Actions -->
+      <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-16">
+        <a href="#menu" class="px-8 py-3.5 bg-gradient-to-r from-gold-600 to-gold-500 text-black text-sm font-bold tracking-widest rounded-full uppercase hover:shadow-gold-glow transform hover:-translate-y-0.5 transition-all text-center">
+          تصفح قائمة الطعام
+        </a>
+        <a href="#reservations" class="px-8 py-3.5 border border-white/20 text-white text-sm font-semibold rounded-full hover:border-gold-500 hover:text-gold-500 transition-all text-center">
+          احجز طاولتك الآن
+        </a>
+      </div>
+
+      <!-- Quick Info Bar (Glassmorphic) -->
+      <div class="glassmorphism rounded-2xl p-6 w-full grid grid-cols-1 md:grid-cols-3 gap-6 text-stone-300 divide-y md:divide-y-0 md:divide-x md:divide-x-reverse divide-gold-500/20 max-w-4xl">
+        <div class="flex items-center gap-4 p-2 md:p-0">
+          <div class="p-3 bg-gold-500/10 text-gold-500 rounded-full">
+            <i data-lucide="clock" class="w-5 h-5"></i>
+          </div>
+          <div class="text-right">
+            <h3 class="text-xs text-stone-500 uppercase tracking-widest">أوقات العمل</h3>
+            <p class="text-sm font-medium">1:00 ظهراً - 12:00 منتصف الليل</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4 p-4 md:p-0">
+          <div class="p-3 bg-gold-500/10 text-gold-500 rounded-full">
+            <i data-lucide="map-pin" class="w-5 h-5"></i>
+          </div>
+          <div class="text-right">
+            <h3 class="text-xs text-stone-500 uppercase tracking-widest">الموقع</h3>
+            <p class="text-sm font-medium">شارع جمال عبد الناصر، بنغازي، ليبيا</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4 p-4 md:p-0">
+          <div class="p-3 bg-gold-500/10 text-gold-500 rounded-full">
+            <i data-lucide="phone" class="w-5 h-5"></i>
+          </div>
+          <div class="text-right">
+            <h3 class="text-xs text-stone-500 uppercase tracking-widest">التواصل المباشر</h3>
+            <p class="text-sm font-medium">+218 91 000 0000</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Parallax Down Arrow -->
+    <a href="#menu" class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-stone-500 hover:text-gold-500 transition-colors animate-bounce">
+      <span class="text-[9px] uppercase tracking-[0.2em]">اسحب للأسفل</span>
+      <i data-lucide="chevron-down" class="w-5 h-5"></i>
+    </a>
+  </section>
+
+  <!-- Special Offers / Highlights Banner -->
+  <section id="offers" class="py-20 border-y border-gold-500/10 bg-luxury-dark/40 relative">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <span class="text-gold-500 font-playfair text-sm uppercase tracking-widest font-semibold">تجارب حصرية</span>
+        <h2 class="text-3xl font-amiri font-bold text-white mt-2">عروض خاصة وطاولات الطهاة</h2>
+        <div class="w-12 h-[1px] bg-gold-500 mx-auto mt-4"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Experience 1 -->
+        <div class="glassmorphism rounded-2xl overflow-hidden flex flex-col sm:flex-row group hover:border-gold-500/40 transition-all duration-500">
+          <div class="sm:w-1/2 h-56 sm:h-auto overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1546964124-0cce460f38ef?auto=format&fit=crop&w=600&q=80" alt="Chef's Table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+          </div>
+          <div class="sm:w-1/2 p-6 flex flex-col justify-between">
+            <div>
+              <span class="text-gold-500 text-xs font-bold tracking-wider uppercase">حجز خاص</span>
+              <h3 class="text-xl font-bold mt-2">طاولة الطاهي الخاصة (Chef's Table)</h3>
+              <p class="text-stone-400 text-xs mt-3 leading-relaxed">عشاء تفاعلي مكون من 7 أطباق فريدة مصممة ومهيأة خصيصاً أمام عينيك من قبل كبير الطهاة التنفيذيين.</p>
+            </div>
+            <div class="mt-6 flex items-center justify-between">
+              <span class="text-gold-500 font-bold text-lg">750 د.ل <span class="text-xs text-stone-500">/ للشخص</span></span>
+              <a href="#reservations" class="px-4 py-2 border border-gold-500/30 rounded-full text-xs hover:bg-gold-500 hover:text-black transition-all">احجز مقعدك</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Experience 2 -->
+        <div class="glassmorphism rounded-2xl overflow-hidden flex flex-col sm:flex-row group hover:border-gold-500/40 transition-all duration-500">
+          <div class="sm:w-1/2 h-56 sm:h-auto overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=600&q=80" alt="Truffle Season" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+          </div>
+          <div class="sm:w-1/2 p-6 flex flex-col justify-between">
+            <div>
+              <span class="text-gold-500 text-xs font-bold tracking-wider uppercase">لفترة محدودة</span>
+              <h3 class="text-xl font-bold mt-2">قائمة الترفيل الأسود الإيطالي</h3>
+              <p class="text-stone-400 text-xs mt-3 leading-relaxed">استمتع بمجموعة أطباق حصرية مدعمة بترفيل ألبا الأبيض والترفيل الأسود النادر المستورد من جبال إيطاليا.</p>
+            </div>
+            <div class="mt-6 flex items-center justify-between">
+              <span class="text-gold-500 font-bold text-lg">480 د.ل <span class="text-xs text-stone-500">/ للشخص</span></span>
+              <a href="#reservations" class="px-4 py-2 border border-gold-500/30 rounded-full text-xs hover:bg-gold-500 hover:text-black transition-all">احجز مقعدك</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Menu Section -->
+  <section id="menu" class="py-24 relative z-10">
+    <div class="max-w-7xl mx-auto px-6">
+      
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <span class="text-gold-500 font-playfair text-sm uppercase tracking-widest font-semibold">قائمتنا المختارة</span>
+        <h2 class="text-4xl md:text-5xl font-amiri font-bold mt-2">رحلة الطهي الفاخرة</h2>
+        <div class="w-16 h-[1px] bg-gold-500 mx-auto mt-4"></div>
+        <p class="text-stone-400 text-sm mt-4 max-w-xl mx-auto font-light">تصفح القائمة المتنوعة من اللحوم الفاخرة، المأكولات البحرية الطازجة، والحلويات الحائزة على جوائز إقليمية.</p>
+      </div>
+
+      <!-- Search & Filters Container -->
+      <div class="glassmorphism rounded-2xl p-6 mb-12 flex flex-col md:flex-row gap-6 justify-between items-center">
+        <!-- Search bar -->
+        <div class="relative w-full md:w-80">
+          <input type="text" id="search-input" placeholder="ابحث عن طبقك المفضل..." class="w-full bg-luxury-charcoal border border-gold-500/10 focus:border-gold-500 rounded-xl px-10 py-3 text-sm text-stone-300 placeholder-stone-500 focus:outline-none focus:ring-1 focus:ring-gold-500 transition-all">
+          <i data-lucide="search" class="absolute right-4 top-3.5 w-4 h-4 text-stone-500"></i>
+        </div>
+
+        <!-- Badge Filters (Popular/Chef Recommended/All) -->
+        <div class="flex flex-wrap gap-3">
+          <button data-filter="all" class="filter-badge px-4 py-2 bg-gold-500 text-black text-xs font-semibold rounded-full transition-all">الكل</button>
+          <button data-filter="popular" class="filter-badge px-4 py-2 border border-gold-500/10 bg-luxury-charcoal/40 text-stone-300 hover:border-gold-500/30 text-xs font-semibold rounded-full transition-all flex items-center gap-1.5">
+            <i data-lucide="star" class="w-3.5 h-3.5 text-gold-500"></i> الأكثر طلباً
+          </button>
+          <button data-filter="chef" class="filter-badge px-4 py-2 border border-gold-500/10 bg-luxury-charcoal/40 text-stone-300 hover:border-gold-500/30 text-xs font-semibold rounded-full transition-all flex items-center gap-1.5">
+            <i data-lucide="award" class="w-3.5 h-3.5 text-gold-500"></i> توصية الشيف
+          </button>
+        </div>
+      </div>
+
+      <!-- Category Navigation (Horizontal Swipeable List) -->
+      <div class="mb-12 overflow-x-auto pb-4 scroll-smooth" id="category-tabs-container">
+        <div class="flex min-w-max gap-4 px-2" id="category-tabs">
+          <button data-category="all" class="category-tab px-6 py-3 border border-gold-500 bg-gold-500 text-black text-sm font-semibold rounded-full transition-all">الكل</button>
+          <button data-category="appetizers" class="category-tab px-6 py-3 border border-gold-500/10 bg-luxury-charcoal/60 text-stone-300 hover:border-gold-500/30 text-sm font-semibold rounded-full transition-all">المقبلات</button>
+          <button data-category="salads" class="category-tab px-6 py-3 border border-gold-500/10 bg-luxury-charcoal/60 text-stone-300 hover:border-gold-500/30 text-sm font-semibold rounded-full transition-all">السلطات</button>
+          <button data-category="mains" class="category-tab px-6 py-3 border border-gold-500/10 bg-luxury-charcoal/60 text-stone-300 hover:border-gold-500/30 text-sm font-semibold rounded-full transition-all">الأطباق الرئيسية</button>
+          <button data-category="grills" class="category-tab px-6 py-3 border border-gold-500/10 bg-luxury-charcoal/60 text-stone-300 hover:border-gold-500/30 text-sm font-semibold rounded-full transition-all">المشويات</button>
+          <button data-category="seafood" class="category-tab px-6 py-3 border border-gold-500/10 bg-luxury-charcoal/60 text-stone-300 hover:border-gold-500/30 text-sm font-semibold rounded-full transition-all">المأكولات البحرية</button>
+          <button data-category="pizza" class="category-tab px-6 py-3 border border-gold-500/10 bg-luxury-charcoal/60 text-stone-300 hover:border-gold-500/30 text-sm font-semibold rounded-full transition-all">البيتزا</button>
+          <button data-category="burgers" class="category-tab px-6 py-3 border border-gold-500/10 bg-luxury-charcoal/60 text-stone-300 hover:border-gold-500/30 text-sm font-semibold rounded-full transition-all">البرجر</button>
+          <button data-category="desserts" class="category-tab px-6 py-3 border border-gold-500/10 bg-luxury-charcoal/60 text-stone-300 hover:border-gold-500/30 text-sm font-semibold rounded-full transition-all">الحلويات</button>
+          <button data-category="hot_drinks" class="category-tab px-6 py-3 border border-gold-500/10 bg-luxury-charcoal/60 text-stone-300 hover:border-gold-500/30 text-sm font-semibold rounded-full transition-all">المشروبات الساخنة</button>
+          <button data-category="cold_drinks" class="category-tab px-6 py-3 border border-gold-500/10 bg-luxury-charcoal/60 text-stone-300 hover:border-gold-500/30 text-sm font-semibold rounded-full transition-all">المشروبات الباردة</button>
+        </div>
+      </div>
+
+      <!-- Menu Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 min-h-[400px]" id="menu-grid">
+        <!-- JS generates cards here dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Luxury Gallery Section -->
+  <section id="gallery" class="py-24 border-t border-gold-500/10 bg-luxury-dark/60">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <span class="text-gold-500 font-playfair text-sm uppercase tracking-widest font-semibold">الجمالية البصرية</span>
+        <h2 class="text-4xl font-amiri font-bold text-white mt-2">معرض صور لوحات الطهي</h2>
+        <div class="w-16 h-[1px] bg-gold-500 mx-auto mt-4"></div>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="gallery-grid">
+        <div class="relative h-64 overflow-hidden rounded-xl group cursor-pointer border border-gold-500/10 hover:border-gold-500/40 transition-colors">
+          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80" alt="Food 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+            <span class="text-gold-500 text-xs font-semibold">كارباتشيو بالترفيل</span>
+          </div>
+        </div>
+        <div class="relative h-64 overflow-hidden rounded-xl group cursor-pointer border border-gold-500/10 hover:border-gold-500/40 transition-colors">
+          <img src="https://images.unsplash.com/photo-1546964124-0cce460f38ef?auto=format&fit=crop&w=600&q=80" alt="Food 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+            <span class="text-gold-500 text-xs font-semibold">ستيك واغيو A5</span>
+          </div>
+        </div>
+        <div class="relative h-64 overflow-hidden rounded-xl group cursor-pointer border border-gold-500/10 hover:border-gold-500/40 transition-colors">
+          <img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80" alt="Food 3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+            <span class="text-gold-500 text-xs font-semibold">الكافيار الذهبي الإمبراطوري</span>
+          </div>
+        </div>
+        <div class="relative h-64 overflow-hidden rounded-xl group cursor-pointer border border-gold-500/10 hover:border-gold-500/40 transition-colors">
+          <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80" alt="Food 4" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+            <span class="text-gold-500 text-xs font-semibold">سوفليه الشوكولاتة</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reservation Section -->
+  <section id="reservations" class="py-24 relative z-10">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="glassmorphism rounded-3xl p-8 md:p-12 relative overflow-hidden">
+        <!-- Floating Accent -->
+        <div class="absolute -top-12 -right-12 w-24 h-24 bg-gold-500/15 rounded-full blur-xl"></div>
+        
+        <div class="text-center mb-10">
+          <i data-lucide="calendar" class="w-10 h-10 text-gold-500 mx-auto mb-3"></i>
+          <span class="text-gold-500 text-xs font-bold tracking-widest uppercase">حجز طاولة</span>
+          <h2 class="text-3xl font-amiri font-bold text-white mt-1">احجز مقعدك الفاخر اليوم</h2>
+          <div class="w-12 h-[1px] bg-gold-500 mx-auto mt-3"></div>
+          <p class="text-stone-400 text-xs mt-3">يرجى تعبئة الحقول وسيتواصل فريقنا معك لتأكيد حجز الطاولة فوراً.</p>
+        </div>
+
+        <form id="reservation-form" class="space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs font-semibold text-stone-400 mb-2">الاسم بالكامل *</label>
+              <input type="text" id="res-name" required placeholder="أدخل اسمك الكريم" class="w-full bg-luxury-charcoal border border-gold-500/15 focus:border-gold-500 rounded-xl px-4 py-3 text-sm text-stone-200 focus:outline-none transition-all">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-stone-400 mb-2">رقم الجوال *</label>
+              <input type="tel" id="res-phone" required placeholder="05xxxxxxxx" class="w-full bg-luxury-charcoal border border-gold-500/15 focus:border-gold-500 rounded-xl px-4 py-3 text-sm text-stone-200 focus:outline-none transition-all">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <label class="block text-xs font-semibold text-stone-400 mb-2">تاريخ الحجز *</label>
+              <input type="date" id="res-date" required class="w-full bg-luxury-charcoal border border-gold-500/15 focus:border-gold-500 rounded-xl px-4 py-3 text-sm text-stone-200 focus:outline-none transition-all">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-stone-400 mb-2">التوقيت *</label>
+              <select id="res-time" required class="w-full bg-luxury-charcoal border border-gold-500/15 focus:border-gold-500 rounded-xl px-4 py-3 text-sm text-stone-200 focus:outline-none transition-all">
+                <option value="1:00 PM">1:00 ظهراً</option>
+                <option value="2:30 PM">2:30 ظهراً</option>
+                <option value="4:00 PM">4:00 عصراً</option>
+                <option value="6:00 PM">6:00 مساءً</option>
+                <option value="7:30 PM">7:30 مساءً (ساعة الذروة)</option>
+                <option value="9:00 PM">9:00 مساءً (ساعة الذروة)</option>
+                <option value="10:30 PM">10:30 مساءً</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-stone-400 mb-2">عدد الضيوف *</label>
+              <select id="res-guests" required class="w-full bg-luxury-charcoal border border-gold-500/15 focus:border-gold-500 rounded-xl px-4 py-3 text-sm text-stone-200 focus:outline-none transition-all">
+                <option value="1">شخص واحد</option>
+                <option value="2" selected>شخصين</option>
+                <option value="3">3 أشخاص</option>
+                <option value="4">4 أشخاص</option>
+                <option value="5">5 أشخاص</option>
+                <option value="6">6 أشخاص</option>
+                <option value="7+">أكثر من 6 أشخاص (حفلة خاصة)</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-stone-400 mb-2">طلبات خاصة / ملاحظات</label>
+            <textarea id="res-notes" rows="3" placeholder="مثل: احتفال بذكرى زواج، تفضيل طاولة بجانب النافذة، حساسية من طعام معين..." class="w-full bg-luxury-charcoal border border-gold-500/15 focus:border-gold-500 rounded-xl px-4 py-3 text-sm text-stone-200 focus:outline-none transition-all"></textarea>
+          </div>
+
+          <button type="submit" class="w-full py-4 bg-gradient-to-r from-gold-600 to-gold-500 text-black font-bold text-sm rounded-xl hover:shadow-gold-glow transform hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2">
+            <i data-lucide="check" class="w-4 h-4"></i> تأكيد الحجز عبر الواتساب
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location & Contact Section -->
+  <section id="location" class="py-24 border-t border-gold-500/10 bg-luxury-dark/40">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      
+      <!-- Contact Info -->
+      <div class="space-y-8">
+        <div>
+          <span class="text-gold-500 font-playfair text-sm uppercase tracking-widest font-semibold">تفضل بزيارتنا</span>
+          <h2 class="text-4xl font-amiri font-bold text-white mt-1">موقعنا الفريد في قلب العاصمة</h2>
+          <div class="w-12 h-[1px] bg-gold-500 mt-4"></div>
+        </div>
+
+        <p class="text-stone-400 text-sm leading-relaxed max-w-lg">
+          يقع مطعم بيت الشواء في أحد أرقى الشوارع حيوية ببنغازي لتستمتع بأمسيات لا مثيل لها. نوفر خدمة إيقاف السيارات المجانية لضيوفنا.
+        </p>
+
+        <div class="space-y-4 text-stone-300">
+          <div class="flex items-center gap-3">
+            <div class="p-2.5 bg-gold-500/10 text-gold-500 rounded-lg">
+              <i data-lucide="map-pin" class="w-5 h-5"></i>
+            </div>
+            <span class="text-sm">شارع جمال عبد الناصر، بنغازي، ليبيا</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="p-2.5 bg-gold-500/10 text-gold-500 rounded-lg">
+              <i data-lucide="phone" class="w-5 h-5"></i>
+            </div>
+            <span class="text-sm" dir="ltr">+218 91 000 0000</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="p-2.5 bg-gold-500/10 text-gold-500 rounded-lg">
+              <i data-lucide="mail" class="w-5 h-5"></i>
+            </div>
+            <span class="text-sm">contact@shawaa-restaurant.com</span>
+          </div>
+        </div>
+
+        <!-- Google Maps Link Button -->
+        <a href="https://maps.google.com/?q=Gamal+Abdel+Nasser+Street+Benghazi" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 border border-gold-500/30 rounded-full text-xs font-semibold text-gold-500 hover:bg-gold-500 hover:text-black transition-all">
+          <i data-lucide="navigation" class="w-4 h-4"></i> اتجاهات الخرائط (GPS)
+        </a>
+      </div>
+
+      <!-- Embedded Map Mapbox/Google style container -->
+      <div class="relative rounded-3xl overflow-hidden border border-gold-500/20 shadow-gold-glow aspect-video lg:aspect-square">
+        <!-- Mock Map Background / Realistic Custom Styled Dark Map -->
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d54203.95764030588!2d20.046345639691456!3d32.11543883015509!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x139df3dc9e5f5f4b%3A0x868cb5a3d76e48cb!2sBenghazi%2C%20Libya!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s" 
+          class="absolute inset-0 w-full h-full border-0 filter invert-[90%] hue-rotate-[180deg] contrast-[120%]"
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact" class="py-16 border-t border-gold-500/10 bg-luxury-black relative z-10">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+      
+      <!-- Brand column -->
+      <div class="space-y-4 col-span-1 md:col-span-2">
+        <h3 class="font-cairo text-2xl font-bold text-gold-500">بيت الشواء</h3>
+        <p class="text-stone-400 text-xs leading-relaxed max-w-sm">
+          تجربة عشاء حائزة على جوائز تجمع بين الفخامة والطهي الإبداعي المعاصر. نسعى دائماً لتقديم الأفضل لعملائنا في المملكة العربية السعودية.
+        </p>
+        <div class="flex gap-4">
+          <a href="#" class="p-2 border border-stone-800 hover:border-gold-500 text-stone-500 hover:text-gold-500 rounded-full transition-all"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+          <a href="#" class="p-2 border border-stone-800 hover:border-gold-500 text-stone-500 hover:text-gold-500 rounded-full transition-all"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+          <a href="#" class="p-2 border border-stone-800 hover:border-gold-500 text-stone-500 hover:text-gold-500 rounded-full transition-all"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="space-y-4">
+        <h4 class="text-sm font-bold text-gold-500 uppercase tracking-widest">روابط سريعة</h4>
+        <ul class="space-y-2 text-stone-400 text-xs">
+          <li><a href="#hero" class="hover:text-gold-500 transition-colors">الرئيسية</a></li>
+          <li><a href="#menu" class="hover:text-gold-500 transition-colors">قائمة الطعام</a></li>
+          <li><a href="#offers" class="hover:text-gold-500 transition-colors">العروض الخاصة</a></li>
+          <li><a href="#reservations" class="hover:text-gold-500 transition-colors">حجوزات الطاولات</a></li>
+        </ul>
+      </div>
+
+      <!-- Working hours & status -->
+      <div class="space-y-4">
+        <h4 class="text-sm font-bold text-gold-500 uppercase tracking-widest">ساعات الضيافة</h4>
+        <ul class="space-y-2 text-stone-400 text-xs">
+          <li>الأحد - الأربعاء: 1:00م - 11:30م</li>
+          <li>الخميس - السبت: 1:00م - 12:30ص</li>
+          <li class="pt-2 text-gold-500 font-semibold flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span> مفتوح حالياً
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Sub-footer -->
+    <div class="max-w-7xl mx-auto px-6 border-t border-stone-900 pt-8 flex flex-col md:flex-row justify-between items-center text-stone-500 text-xs gap-4">
+      <p>© 2026 مطعم بيت الشواء. جميع الحقوق محفوظة.</p>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-gold-500">سياسة الخصوصية</a>
+        <a href="#" class="hover:text-gold-500">شروط الاستخدام</a>
+        <span id="pwa-install-indicator" class="text-gold-500 cursor-pointer hover:underline hidden">تثبيت التطبيق (PWA)</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Cart Drawer (Slide-out) -->
+  <div id="cart-drawer" class="fixed inset-y-0 left-0 w-full sm:w-[480px] bg-luxury-dark/95 border-r border-gold-500/20 z-50 transform -translate-x-full transition-transform duration-500 shadow-glassmorphism flex flex-col hidden">
+    <!-- Header -->
+    <div class="p-6 border-b border-gold-500/10 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <i data-lucide="shopping-cart" class="w-5 h-5 text-gold-500"></i>
+        <h3 class="text-lg font-bold text-white">سلة الطلبات</h3>
+      </div>
+      <button id="cart-close-btn" class="p-2 text-stone-400 hover:text-gold-500 transition-colors">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+    </div>
+
+    <!-- Cart Items Area (Scrollable) -->
+    <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 space-y-4">
+      <!-- Generated items -->
+    </div>
+
+    <!-- Reservation details inside checkout drawer -->
+    <div class="p-6 border-t border-gold-500/15 bg-luxury-charcoal/40 space-y-4">
+      <h4 class="text-xs font-bold text-gold-500 uppercase tracking-widest">خيارات الطلب والتسليم</h4>
+      
+      <!-- Order type toggle -->
+      <div class="grid grid-cols-2 gap-2 bg-luxury-black p-1 rounded-lg border border-gold-500/10">
+        <button id="order-type-dinein" class="py-2 text-xs font-bold rounded-md bg-gold-500 text-black transition-all">تناول في المطعم</button>
+        <button id="order-type-delivery" class="py-2 text-xs font-bold text-stone-400 rounded-md transition-all">توصيل</button>
+      </div>
+
+      <!-- Dine-in Details Form inside Cart -->
+      <div id="cart-dinein-details" class="space-y-3">
+        <div class="grid grid-cols-2 gap-2">
+          <input type="text" id="cart-cust-name" required placeholder="اسم العميل *" class="w-full bg-luxury-black border border-gold-500/15 rounded-lg px-3 py-2 text-xs text-stone-200 placeholder-stone-600 focus:outline-none">
+          <input type="tel" id="cart-cust-phone" required placeholder="رقم الجوال *" class="w-full bg-luxury-black border border-gold-500/15 rounded-lg px-3 py-2 text-xs text-stone-200 placeholder-stone-600 focus:outline-none">
+        </div>
+        <div class="grid grid-cols-3 gap-2">
+          <input type="date" id="cart-cust-date" class="w-full bg-luxury-black border border-gold-500/15 rounded-lg px-2 py-2 text-xs text-stone-200 focus:outline-none">
+          <select id="cart-cust-time" class="w-full bg-luxury-black border border-gold-500/15 rounded-lg px-2 py-2 text-xs text-stone-200 focus:outline-none">
+            <option value="1:00 PM">1:00م</option>
+            <option value="4:00 PM">4:00م</option>
+            <option value="7:30 PM">7:30م</option>
+            <option value="9:00 PM">9:00م</option>
+            <option value="10:30 PM">10:30م</option>
+          </select>
+          <select id="cart-cust-guests" class="w-full bg-luxury-black border border-gold-500/15 rounded-lg px-2 py-2 text-xs text-stone-200 focus:outline-none">
+            <option value="1">1 ضيف</option>
+            <option value="2" selected>2 ضيوف</option>
+            <option value="4">4 ضيوف</option>
+            <option value="6">6 ضيوف</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Delivery Details Form inside Cart (hidden initially) -->
+      <div id="cart-delivery-details" class="space-y-3 hidden">
+        <div class="grid grid-cols-2 gap-2">
+          <input type="text" id="cart-deliv-name" placeholder="الاسم *" class="w-full bg-luxury-black border border-gold-500/15 rounded-lg px-3 py-2 text-xs text-stone-200 placeholder-stone-600 focus:outline-none">
+          <input type="tel" id="cart-deliv-phone" placeholder="رقم الجوال *" class="w-full bg-luxury-black border border-gold-500/15 rounded-lg px-3 py-2 text-xs text-stone-200 placeholder-stone-600 focus:outline-none">
+        </div>
+        <input type="text" id="cart-deliv-address" placeholder="عنوان التوصيل بالكامل *" class="w-full bg-luxury-black border border-gold-500/15 rounded-lg px-3 py-2 text-xs text-stone-200 placeholder-stone-600 focus:outline-none">
+      </div>
+    </div>
+
+    <!-- Calculations & Submit -->
+    <div class="p-6 border-t border-gold-500/20 bg-luxury-black space-y-4">
+      <div class="space-y-2 text-sm text-stone-400">
+        <div class="flex justify-between">
+          <span>المجموع الفرعي:</span>
+          <span id="cart-subtotal" class="text-white font-semibold">0 د.ل</span>
+        </div>
+        <div class="flex justify-between">
+          <span>الضريبة (15%):</span>
+          <span id="cart-tax" class="text-white font-semibold">0 د.ل</span>
+        </div>
+        <div class="flex justify-between text-base text-gold-500 font-bold border-t border-stone-850 pt-2">
+          <span>الإجمالي الكلي:</span>
+          <span id="cart-total">0 د.ل</span>
+        </div>
+      </div>
+
+      <button id="checkout-btn" class="w-full py-4 bg-gradient-to-r from-gold-600 to-gold-500 text-black font-bold text-sm rounded-xl hover:shadow-gold-glow flex items-center justify-center gap-2">
+        <i data-lucide="check-circle2" class="w-4 h-4"></i> تأكيد وإرسال الطلب عبر الواتساب
+      </button>
+    </div>
+  </div>
+
+  <!-- Item Zoom/Preview Modal -->
+  <div id="zoom-modal" class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 hidden transition-opacity duration-300">
+    <div class="relative max-w-3xl w-full bg-luxury-charcoal border border-gold-500/20 rounded-2xl overflow-hidden flex flex-col md:flex-row">
+      <button id="zoom-close-btn" class="absolute top-4 left-4 p-2 bg-black/60 text-white rounded-full hover:text-gold-500 z-10">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+
+      <div class="md:w-1/2 h-64 md:h-auto relative">
+        <img id="zoom-image" src="" alt="Dish Zoomed" class="w-full h-full object-cover">
+        <!-- Floating Recommendation badge inside modal -->
+        <span id="zoom-badge" class="absolute top-4 right-4 px-3 py-1 bg-gold-500 text-black text-[10px] font-bold rounded-full uppercase tracking-wider hidden">توصية الشيف</span>
+      </div>
+
+      <div class="md:w-1/2 p-8 flex flex-col justify-between">
+        <div>
+          <span id="zoom-category" class="text-gold-500 text-xs font-semibold uppercase tracking-widest">تصنيف</span>
+          <h3 id="zoom-title" class="text-2xl font-amiri font-bold text-white mt-1">اسم الطبق</h3>
+          <p id="zoom-desc" class="text-stone-400 text-sm mt-4 leading-relaxed">وصف دقيق وتفصيلي للمكونات اللذيذة والبهارات وطريقة التحضير العصرية.</p>
+          
+          <div class="mt-6 flex gap-4 text-xs text-stone-500">
+            <div class="flex items-center gap-1.5">
+              <i data-lucide="clock" class="w-4 h-4 text-gold-500"></i>
+              <span id="zoom-time">15 دقيقة</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <i data-lucide="star" class="w-4 h-4 text-gold-500"></i>
+              <span>مستوحى من ميشلان</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-gold-500/10 flex justify-between items-center">
+          <span id="zoom-price" class="text-gold-500 font-bold text-2xl">0 د.ل</span>
+          <button id="zoom-add-btn" class="px-6 py-3 bg-gold-500 text-black font-semibold text-xs rounded-full hover:shadow-gold-glow transition-all">إضافة إلى السلة</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QR Code Modal -->
+  <div id="qr-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden">
+    <div class="glassmorphism max-w-sm w-full p-8 rounded-3xl text-center border border-gold-500/20 relative">
+      <button id="qr-close-btn" class="absolute top-4 left-4 text-stone-400 hover:text-gold-500">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+
+      <i data-lucide="qr-code" class="w-8 h-8 text-gold-500 mx-auto mb-2"></i>
+      <h3 class="text-xl font-bold text-white mb-1">رمز قائمة الطعام (QR Code)</h3>
+      <p class="text-xs text-stone-500 mb-6">امسح الكود بكاميرا الجوال لمشاركة القائمة مباشرة مع من تحب.</p>
+
+      <div class="bg-white p-6 rounded-2xl inline-block border border-gold-500/10 shadow-gold-glow mb-6">
+        <!-- Canvas target for QR code generator -->
+        <div id="qrcode-container" class="flex justify-center items-center"></div>
+      </div>
+
+      <p class="text-xs text-gold-500 font-mono tracking-wider break-all select-all font-semibold" id="qr-url-text">http://localhost:8000</p>
+    </div>
+  </div>
+
+  <!-- Dynamic Logic Script -->
+  <script src="menuData.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

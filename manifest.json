@@ -1,0 +1,22 @@
+{
+  "short_name": "بيت الشواء",
+  "name": "بيت الشواء - القائمة الفاخرة",
+  "description": "قائمة الطعام الرقمية الفاخرة ونظام الطلب المباشر لمطعم بيت الشواء",
+  "icons": [
+    {
+      "src": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=192&h=192&q=80",
+      "type": "image/jpeg",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=512&h=512&q=80",
+      "type": "image/jpeg",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "./index.html",
+  "background_color": "#0a0a0a",
+  "theme_color": "#d4af37",
+  "display": "standalone",
+  "orientation": "portrait"
+}
