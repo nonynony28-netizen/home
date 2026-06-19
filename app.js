@@ -54,10 +54,26 @@ const reservationForm = document.getElementById('reservation-form');
 
 // Service Worker & Startup Registration
 window.addEventListener('DOMContentLoaded', () => {
-  // Hide loader after a brief aesthetic delay
+  // Cinematic Split-Panel Loading Transition
   setTimeout(() => {
-    loader.classList.add('opacity-0', 'pointer-events-none');
-  }, 1200);
+    const loaderTop = document.getElementById('loader-top');
+    const loaderBottom = document.getElementById('loader-bottom');
+    const loaderContent = document.getElementById('loader-content');
+    
+    if (loaderTop && loaderBottom && loaderContent) {
+      loaderTop.classList.add('-translate-y-full');
+      loaderBottom.classList.add('translate-y-full');
+      loaderContent.classList.add('opacity-0', 'scale-90');
+      
+      // Completely remove loader overlay after panel slide transition completes
+      setTimeout(() => {
+        loader.classList.add('hidden');
+      }, 1000);
+    } else {
+      // Fallback if elements not found
+      loader.classList.add('hidden');
+    }
+  }, 2200); // Allow time for SVG draw animation to showcase
 
   // Set default dates to today
   const today = new Date().toISOString().split('T')[0];

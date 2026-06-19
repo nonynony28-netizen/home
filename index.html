@@ -36,11 +36,11 @@
               accent: '#d4af37'
             },
             luxury: {
-              black: '#070707',
-              dark: '#0d0d0d',
-              charcoal: '#161616',
-              card: '#202020',
-              border: '#332918', // Subtle gold/bronze border
+              black: '#02040a', // Deep regal navy-black
+              dark: '#050a1c',  // Deep navy
+              charcoal: '#0b122c', // Dark navy card/background
+              card: '#111b3e',  // Slate blue card
+              border: '#1b2a5c', // Luxury blue border
               light: '#fbfbfb',
               glow: 'rgba(212, 175, 55, 0.15)'
             }
@@ -73,7 +73,7 @@
       height: 6px;
     }
     ::-webkit-scrollbar-track {
-      background: #070707;
+      background: #02040a;
     }
     ::-webkit-scrollbar-thumb {
       background: #c59b27;
@@ -83,13 +83,24 @@
       background: #a2781d;
     }
 
+    /* SVG Emblem Stroke Animation */
+    @keyframes draw-path {
+      0% { stroke-dashoffset: 400; }
+      100% { stroke-dashoffset: 0; }
+    }
+    .animate-draw {
+      stroke-dasharray: 400;
+      stroke-dashoffset: 400;
+      animation: draw-path 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
     /* Cinematic lighting/glow animations */
     .glow-dot {
       filter: blur(120px);
     }
 
     .glassmorphism {
-      background: rgba(22, 22, 22, 0.7);
+      background: rgba(11, 18, 44, 0.7);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(212, 175, 55, 0.08);
@@ -120,18 +131,26 @@
     <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-gold-700/10 rounded-full glow-dot float-slow" style="animation-delay: -4s;"></div>
   </div>
 
-  <!-- Luxury Loading Page -->
-  <div id="loader" class="fixed inset-0 bg-luxury-black z-50 flex flex-col justify-center items-center transition-all duration-1000 ease-in-out">
-    <div class="relative flex flex-col items-center">
-      <!-- Outer Rotating Gold Ring -->
-      <div class="w-24 h-24 border-2 border-dashed border-gold-500/20 rounded-full animate-spin duration-10000"></div>
-      <!-- Inner Glowing Logo -->
-      <div class="absolute inset-0 flex items-center justify-center">
-        <span class="font-cairo text-3xl font-bold tracking-widest text-gold-500 animate-pulse">شواء</span>
+  <!-- Cinematic Split-Panel Loading Page -->
+  <div id="loader" class="fixed inset-0 z-50 pointer-events-none flex flex-col justify-center items-center overflow-hidden">
+    <!-- Top Sliding Panel -->
+    <div id="loader-top" class="absolute top-0 left-0 w-full h-[50%] bg-[#02040a] border-b border-gold-500/10 transition-transform duration-1000 cubic-bezier(0.85, 0, 0.15, 1) pointer-events-auto"></div>
+    <!-- Bottom Sliding Panel -->
+    <div id="loader-bottom" class="absolute bottom-0 left-0 w-full h-[50%] bg-[#02040a] border-t border-gold-500/10 transition-transform duration-1000 cubic-bezier(0.85, 0, 0.15, 1) pointer-events-auto"></div>
+    
+    <!-- Loader Center Content -->
+    <div id="loader-content" class="relative z-20 flex flex-col items-center transition-all duration-700 ease-in-out pointer-events-auto">
+      <!-- Golden Diamond SVG Emblem -->
+      <div class="relative w-28 h-28 flex items-center justify-center mb-6">
+        <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]">
+          <path d="M50 5 L95 50 L50 95 L5 50 Z" stroke="#c59b27" stroke-width="2.5" class="animate-draw"/>
+          <path d="M50 18 L82 50 L50 82 L18 50 Z" stroke="#c59b27" stroke-width="1.5" stroke-dasharray="6,6" opacity="0.6"/>
+          <circle cx="50" cy="50" r="10" stroke="#c59b27" stroke-width="2" class="animate-pulse"/>
+        </svg>
       </div>
-      <h1 class="mt-8 font-cairo text-xl tracking-widest text-gold-500">بيت الشواء</h1>
-      <p class="text-xs text-stone-500 tracking-[0.2em] uppercase mt-2">Fine Dining Gastronomy</p>
-      <div class="w-16 h-[1px] bg-gradient-to-r from-transparent via-gold-500 to-transparent mt-4"></div>
+      <h1 class="font-cairo text-3xl font-extrabold tracking-[0.25em] text-gold-500 select-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]">بيت الشواء</h1>
+      <p class="text-[10px] text-stone-500 tracking-[0.3em] uppercase mt-2">HIGH GASTRONOMY</p>
+      <div class="w-12 h-[1px] bg-gradient-to-r from-transparent via-gold-500 to-transparent mt-4"></div>
     </div>
   </div>
 
@@ -274,54 +293,8 @@
     </a>
   </section>
 
-  <!-- Special Offers / Highlights Banner -->
-  <section id="offers" class="py-20 border-y border-gold-500/10 bg-luxury-dark/40 relative">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center mb-12">
-        <span class="text-gold-500 font-playfair text-sm uppercase tracking-widest font-semibold">تجارب حصرية</span>
-        <h2 class="text-3xl font-amiri font-bold text-white mt-2">عروض خاصة وطاولات الطهاة</h2>
-        <div class="w-12 h-[1px] bg-gold-500 mx-auto mt-4"></div>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- Experience 1 -->
-        <div class="glassmorphism rounded-2xl overflow-hidden flex flex-col sm:flex-row group hover:border-gold-500/40 transition-all duration-500">
-          <div class="sm:w-1/2 h-56 sm:h-auto overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1546964124-0cce460f38ef?auto=format&fit=crop&w=600&q=80" alt="Chef's Table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-          </div>
-          <div class="sm:w-1/2 p-6 flex flex-col justify-between">
-            <div>
-              <span class="text-gold-500 text-xs font-bold tracking-wider uppercase">حجز خاص</span>
-              <h3 class="text-xl font-bold mt-2">طاولة الطاهي الخاصة (Chef's Table)</h3>
-              <p class="text-stone-400 text-xs mt-3 leading-relaxed">عشاء تفاعلي مكون من 7 أطباق فريدة مصممة ومهيأة خصيصاً أمام عينيك من قبل كبير الطهاة التنفيذيين.</p>
-            </div>
-            <div class="mt-6 flex items-center justify-between">
-              <span class="text-gold-500 font-bold text-lg">750 د.ل <span class="text-xs text-stone-500">/ للشخص</span></span>
-              <a href="#reservations" class="px-4 py-2 border border-gold-500/30 rounded-full text-xs hover:bg-gold-500 hover:text-black transition-all">احجز مقعدك</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Experience 2 -->
-        <div class="glassmorphism rounded-2xl overflow-hidden flex flex-col sm:flex-row group hover:border-gold-500/40 transition-all duration-500">
-          <div class="sm:w-1/2 h-56 sm:h-auto overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=600&q=80" alt="Truffle Season" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-          </div>
-          <div class="sm:w-1/2 p-6 flex flex-col justify-between">
-            <div>
-              <span class="text-gold-500 text-xs font-bold tracking-wider uppercase">لفترة محدودة</span>
-              <h3 class="text-xl font-bold mt-2">قائمة الترفيل الأسود الإيطالي</h3>
-              <p class="text-stone-400 text-xs mt-3 leading-relaxed">استمتع بمجموعة أطباق حصرية مدعمة بترفيل ألبا الأبيض والترفيل الأسود النادر المستورد من جبال إيطاليا.</p>
-            </div>
-            <div class="mt-6 flex items-center justify-between">
-              <span class="text-gold-500 font-bold text-lg">480 د.ل <span class="text-xs text-stone-500">/ للشخص</span></span>
-              <a href="#reservations" class="px-4 py-2 border border-gold-500/30 rounded-full text-xs hover:bg-gold-500 hover:text-black transition-all">احجز مقعدك</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- Decluttered Spacer between sections -->
+  <div class="py-6"></div>
 
   <!-- Interactive Menu Section -->
   <section id="menu" class="py-24 relative z-10">
