@@ -151,11 +151,8 @@
       <nav class="hidden lg:flex items-center gap-8 text-sm tracking-wider text-stone-300 font-medium">
         <a href="#hero" class="hover:text-gold-500 transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-gold-500 hover:after:w-full after:transition-all">الرئيسية</a>
         <a href="#menu" class="hover:text-gold-500 transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-gold-500 hover:after:w-full after:transition-all">قائمة الطعام</a>
-        <a href="#offers" class="hover:text-gold-500 transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-gold-500 hover:after:w-full after:transition-all">العروض الخاصة</a>
-        <a href="#gallery" class="hover:text-gold-500 transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-gold-500 hover:after:w-full after:transition-all">معرض الصور</a>
         <a href="#reservations" class="hover:text-gold-500 transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-gold-500 hover:after:w-full after:transition-all">الحجوزات</a>
         <a href="#location" class="hover:text-gold-500 transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-gold-500 hover:after:w-full after:transition-all">موقعنا</a>
-        <a href="#contact" class="hover:text-gold-500 transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-gold-500 hover:after:w-full after:transition-all">تواصل معنا</a>
       </nav>
 
       <!-- Action Buttons -->
@@ -169,7 +166,7 @@
         <button id="cart-trigger-btn" class="relative px-4 py-2 flex items-center gap-2 border border-gold-500/30 rounded-full bg-luxury-charcoal/60 text-white hover:border-gold-500 hover:shadow-gold-glow transition-all duration-300">
           <i data-lucide="shopping-bag" class="w-4 h-4 text-gold-500"></i>
           <span class="hidden md:inline text-xs font-semibold">السلة</span>
-          <span id="cart-badge" class="bg-gold-500 text-black text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+          <span id="cart-badge" class="bg-gold-500 text-black text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center transition-all duration-300 transform">0</span>
         </button>
 
         <!-- Reservation Header Button -->
@@ -191,11 +188,8 @@
       </button>
       <a href="#hero" class="mobile-nav-link hover:text-gold-500 transition-colors">الرئيسية</a>
       <a href="#menu" class="mobile-nav-link hover:text-gold-500 transition-colors">قائمة الطعام</a>
-      <a href="#offers" class="mobile-nav-link hover:text-gold-500 transition-colors">العروض الخاصة</a>
-      <a href="#gallery" class="mobile-nav-link hover:text-gold-500 transition-colors">معرض الصور</a>
       <a href="#reservations" class="mobile-nav-link hover:text-gold-500 transition-colors">الحجوزات</a>
       <a href="#location" class="mobile-nav-link hover:text-gold-500 transition-colors">موقعنا</a>
-      <a href="#contact" class="mobile-nav-link hover:text-gold-500 transition-colors">تواصل معنا</a>
       <a href="#reservations" class="mt-4 px-8 py-3 bg-gold-500 text-black font-bold text-sm rounded-full tracking-wider hover:shadow-gold-glow">
         احجز طاولتك
       </a>
@@ -364,17 +358,13 @@
       <!-- Category Navigation (Horizontal Swipeable List) -->
       <div class="mb-12 overflow-x-auto pb-4 scroll-smooth" id="category-tabs-container">
         <div class="flex min-w-max gap-4 px-2" id="category-tabs">
-          <button data-category="all" class="category-tab px-6 py-3 border border-gold-500 bg-gold-500 text-black text-sm font-semibold rounded-full transition-all">الكل</button>
-          <button data-category="appetizers" class="category-tab px-6 py-3 border border-gold-500/10 bg-luxury-charcoal/60 text-stone-300 hover:border-gold-500/30 text-sm font-semibold rounded-full transition-all">المقبلات</button>
-          <button data-category="salads" class="category-tab px-6 py-3 border border-gold-500/10 bg-luxury-charcoal/60 text-stone-300 hover:border-gold-500/30 text-sm font-semibold rounded-full transition-all">السلطات</button>
-          <button data-category="mains" class="category-tab px-6 py-3 border border-gold-500/10 bg-luxury-charcoal/60 text-stone-300 hover:border-gold-500/30 text-sm font-semibold rounded-full transition-all">الأطباق الرئيسية</button>
-          <button data-category="grills" class="category-tab px-6 py-3 border border-gold-500/10 bg-luxury-charcoal/60 text-stone-300 hover:border-gold-500/30 text-sm font-semibold rounded-full transition-all">المشويات</button>
-          <button data-category="seafood" class="category-tab px-6 py-3 border border-gold-500/10 bg-luxury-charcoal/60 text-stone-300 hover:border-gold-500/30 text-sm font-semibold rounded-full transition-all">المأكولات البحرية</button>
-          <button data-category="pizza" class="category-tab px-6 py-3 border border-gold-500/10 bg-luxury-charcoal/60 text-stone-300 hover:border-gold-500/30 text-sm font-semibold rounded-full transition-all">البيتزا</button>
-          <button data-category="burgers" class="category-tab px-6 py-3 border border-gold-500/10 bg-luxury-charcoal/60 text-stone-300 hover:border-gold-500/30 text-sm font-semibold rounded-full transition-all">البرجر</button>
-          <button data-category="desserts" class="category-tab px-6 py-3 border border-gold-500/10 bg-luxury-charcoal/60 text-stone-300 hover:border-gold-500/30 text-sm font-semibold rounded-full transition-all">الحلويات</button>
-          <button data-category="hot_drinks" class="category-tab px-6 py-3 border border-gold-500/10 bg-luxury-charcoal/60 text-stone-300 hover:border-gold-500/30 text-sm font-semibold rounded-full transition-all">المشروبات الساخنة</button>
-          <button data-category="cold_drinks" class="category-tab px-6 py-3 border border-gold-500/10 bg-luxury-charcoal/60 text-stone-300 hover:border-gold-500/30 text-sm font-semibold rounded-full transition-all">المشروبات الباردة</button>
+          <button data-category="all" class="category-tab px-6 py-3 border border-gold-500 bg-gold-500 text-black text-sm font-semibold rounded-full transition-all">جميع الأطباق</button>
+          <button data-category="signature_appetizers" class="category-tab px-6 py-3 border border-gold-500/10 bg-luxury-charcoal/60 text-stone-300 hover:border-gold-500/30 text-sm font-semibold rounded-full transition-all">المقبلات الفاخرة</button>
+          <button data-category="main_masterpieces" class="category-tab px-6 py-3 border border-gold-500/10 bg-luxury-charcoal/60 text-stone-300 hover:border-gold-500/30 text-sm font-semibold rounded-full transition-all">الأطباق الرئيسية</button>
+          <button data-category="from_the_grill" class="category-tab px-6 py-3 border border-gold-500/10 bg-luxury-charcoal/60 text-stone-300 hover:border-gold-500/30 text-sm font-semibold rounded-full transition-all">من الشواية</button>
+          <button data-category="ocean_delicacies" class="category-tab px-6 py-3 border border-gold-500/10 bg-luxury-charcoal/60 text-stone-300 hover:border-gold-500/30 text-sm font-semibold rounded-full transition-all">المأكولات البحرية</button>
+          <button data-category="exquisite_desserts" class="category-tab px-6 py-3 border border-gold-500/10 bg-luxury-charcoal/60 text-stone-300 hover:border-gold-500/30 text-sm font-semibold rounded-full transition-all">الحلويات الراقية</button>
+          <button data-category="premium_drinks" class="category-tab px-6 py-3 border border-gold-500/10 bg-luxury-charcoal/60 text-stone-300 hover:border-gold-500/30 text-sm font-semibold rounded-full transition-all">المشروبات الفاخرة</button>
         </div>
       </div>
 

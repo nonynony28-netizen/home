@@ -1,7 +1,7 @@
 const menuData = [
   {
     id: 1,
-    category: "appetizers",
+    category: "signature_appetizers",
     name: "كارباتشيو لحم العجل بالترفيل",
     description: "شرائح رقيقة من لحم العجل الفاخر المغذى على الحبوب، تعلوها رغوة الترفيل الأسود، زيت زيتون البكر الممتاز معتق، ورقائق بارميزان ريجانوا 24 شهر.",
     price: 145,
@@ -12,7 +12,7 @@ const menuData = [
   },
   {
     id: 2,
-    category: "appetizers",
+    category: "signature_appetizers",
     name: "الكافيار الذهبي الإمبراطوري",
     description: "حبيبات الكافيار الفاخرة مصحوبة برقائق الذهب القابلة للأكل عيار 24، تقدم مع خبز البريوش الدافئ المحمص والزبدة المملحة المستوردة.",
     price: 450,
@@ -23,7 +23,7 @@ const menuData = [
   },
   {
     id: 3,
-    category: "appetizers",
+    category: "signature_appetizers",
     name: "فطائر فوا جرا المكرملة",
     description: "كبد الإوز الفاخر المحمر ببطء، يقدم مع مربى التين البري ولمسة من بلسمك معتق لمدة 12 سنة.",
     price: 195,
@@ -34,7 +34,7 @@ const menuData = [
   },
   {
     id: 4,
-    category: "salads",
+    category: "signature_appetizers",
     name: "سلطة البوراتا والتمور الفاخرة",
     description: "جبن البوراتا الإيطالي الكريمي الطازج، يقدم مع مزيج من التمور السعودية الفاخرة، ريحان بري، صنوبر محمص، وصلصة الخل البلسمي بالترفل.",
     price: 95,
@@ -45,7 +45,7 @@ const menuData = [
   },
   {
     id: 5,
-    category: "salads",
+    category: "signature_appetizers",
     name: "سلطة الشمندر المشوي والماعز الجبلي",
     description: "مكعبات الشمندر العضوي المشوي على الحطب، مغطاة بجبن الماعز الفرنسي الدافئ، الجوز المكرمل، وخل الليمون والزعتر البري.",
     price: 85,
@@ -56,7 +56,7 @@ const menuData = [
   },
   {
     id: 6,
-    category: "mains",
+    category: "main_masterpieces",
     name: "ستيك واغيو ريب آي A5",
     description: "شريحة لحم واغيو يابانية أصلية بدرجة تعريق A5 المشهورة عالمياً، مشوية ببطء على لهب الفحم الطبيعي، تقدم مع صلصة الترفيل الأسود وملح البحر الخشن.",
     price: 650,
@@ -67,7 +67,7 @@ const menuData = [
   },
   {
     id: 7,
-    category: "mains",
+    category: "main_masterpieces",
     name: "ريزوتو الترفيل الأسود البري",
     description: "أرز الأربوريو الإيطالي المطهو بمرق الفطر الغني، الزبدة الفرنسية، مع رقائق سخية من الترفيل الأسود الطازج وجبن البارميزان المعتق.",
     price: 185,
@@ -78,7 +78,7 @@ const menuData = [
   },
   {
     id: 8,
-    category: "mains",
+    category: "main_masterpieces",
     name: "كتف الخروف المطهو ببطء 24 ساعة",
     description: "لحم خروف محلي مطهو ببطء تحت حرارة منخفضة لمدة 24 ساعة مع الأعشاب البرية العطرية والتوابل الشرقية، يقدم على وسادة من الأرز المزعفر.",
     price: 260,
@@ -89,73 +89,7 @@ const menuData = [
   },
   {
     id: 9,
-    category: "grills",
-    name: "ريش الغنم الأسترالية الفاخرة",
-    description: "ريش لحم الضأن المتبلة بالروزماري والثوم البري، مشوية بدقة متناهية على الفحم، تقدم مع البطاطس المهروسة الغنية بالزبدة.",
-    price: 210,
-    prepTime: "20 دقيقة",
-    image: "https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=800&q=80",
-    popular: true,
-    chefRecommended: false
-  },
-  {
-    id: 10,
-    category: "grills",
-    name: "مشكل المشويات الملكي",
-    description: "مزيج فاخر من أسياخ كباب لحم الواغيو، أوصال لحم العجل الطرية، وشيش طاووق الدجاج المتبل بالزعفران، يقدم مع خبز التنور الطازج.",
-    price: 295,
-    prepTime: "22 دقيقة",
-    image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80",
-    popular: true,
-    chefRecommended: true
-  },
-  {
-    id: 11,
-    category: "seafood",
-    name: "سمك القاروص التشيلي المخبوز",
-    description: "فيليه سمك القاروص التشيلي الفاخر، مطبوخ في الفرن مع صلصة الليمون والزنجبيل البري والكزبرة الطازجة، يقدم مع الهليون المشوي.",
-    price: 245,
-    prepTime: "18 دقيقة",
-    image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=800&q=80",
-    popular: true,
-    chefRecommended: true
-  },
-  {
-    id: 12,
-    category: "seafood",
-    name: "جمبري جامبو بصلصة الثوم والليمون",
-    description: "جمبري جامبو بحري طازج مشوي بصلصة الزبدة الفرنسية، الليمون العضوي، الثوم والأعشاب الطازجة.",
-    price: 185,
-    prepTime: "15 دقيقة",
-    image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=800&q=80",
-    popular: false,
-    chefRecommended: false
-  },
-  {
-    id: 13,
-    category: "pizza",
-    name: "بيتزا الترفيل والبوراتا الإيطالية",
-    description: "عجينة نابولي المخمرة لمدة 48 ساعة، تعلوها صلصة البيضاء الكريمية، جبن البوراتا الطازج، زيت الترفيل ورقائق الترفيل الأسود.",
-    price: 130,
-    prepTime: "10 دقائق",
-    image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80",
-    popular: true,
-    chefRecommended: true
-  },
-  {
-    id: 14,
-    category: "pizza",
-    name: "بيتزا بروسيتو دي بارما",
-    description: "صلصة الطماطم العضوية، جبن الموزاريلا الطازج، لحم البروسيتو المجفف، الجرجير البري، ولمسة من بلسمك معتق وجبن البارميزان.",
-    price: 125,
-    prepTime: "10 دقائق",
-    image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=800&q=80",
-    popular: false,
-    chefRecommended: false
-  },
-  {
-    id: 15,
-    category: "burgers",
+    category: "main_masterpieces",
     name: "برجر واغيو الترفيل الملكي",
     description: "قرص من لحم واغيو الفاخر 200 جرام، مغطى بجبن الغرويير السويسري الذائب، بصل مكرمل ببطء، صلصة مايونيز الترفيل المصنوعة منزلياً في خبز البريوش الذهبي.",
     price: 110,
@@ -165,19 +99,52 @@ const menuData = [
     chefRecommended: true
   },
   {
-    id: 16,
-    category: "burgers",
-    name: "برجر كريسبي تشيكن بالذهب",
-    description: "صدر دجاج مقرمش متبل بالأعشاب، مغطى بصوص الجبن الساخن، شرائح هالبينو، تعلوه قطعة من رقائق الذهب القابلة للأكل.",
-    price: 85,
-    prepTime: "12 دقيقة",
-    image: "https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?auto=format&fit=crop&w=800&q=80",
+    id: 10,
+    category: "from_the_grill",
+    name: "ريش الغنم الأسترالية الفاخرة",
+    description: "ريش لحم الضأن المتبلة بالروزماري والثوم البري، مشوية بدقة متناهية على الفحم، تقدم مع البطاطس المهروسة الغنية بالزبدة.",
+    price: 210,
+    prepTime: "20 دقيقة",
+    image: "https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=800&q=80",
+    popular: true,
+    chefRecommended: false
+  },
+  {
+    id: 11,
+    category: "from_the_grill",
+    name: "مشكل المشويات الملكي",
+    description: "مزيج فاخر من أسياخ كباب لحم الواغيو، أوصال لحم العجل الطرية، وشيش طاووق الدجاج المتبل بالزعفران، يقدم مع خبز التنور الطازج.",
+    price: 295,
+    prepTime: "22 دقيقة",
+    image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80",
+    popular: true,
+    chefRecommended: true
+  },
+  {
+    id: 12,
+    category: "ocean_delicacies",
+    name: "سمك القاروص التشيلي المخبوز",
+    description: "فيليه سمك القاروص التشيلي الفاخر، مطبوخ في الفرن مع صلصة الليمون والزنجبيل البري والكزبرة الطازجة، يقدم مع الهليون المشوي.",
+    price: 245,
+    prepTime: "18 دقيقة",
+    image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=800&q=80",
+    popular: true,
+    chefRecommended: true
+  },
+  {
+    id: 13,
+    category: "ocean_delicacies",
+    name: "جمبري جامبو بصلصة الثوم والليمون",
+    description: "جمبري جامبو بحري طازج مشوي بصلصة الزبدة الفرنسية، الليمون العضوي، الثوم والأعشاب الطازجة.",
+    price: 185,
+    prepTime: "15 دقيقة",
+    image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=800&q=80",
     popular: false,
     chefRecommended: false
   },
   {
-    id: 17,
-    category: "desserts",
+    id: 14,
+    category: "exquisite_desserts",
     name: "كعكة الزعفران والذهب الفاخرة",
     description: "كيك الحليب الإسفنجي الغني بنكهة الزعفران الإيراني الأصيل، مغطى بطبقة من الكريمة المخفوقة وأوراق الذهب عيار 24.",
     price: 80,
@@ -187,8 +154,8 @@ const menuData = [
     chefRecommended: true
   },
   {
-    id: 18,
-    category: "desserts",
+    id: 15,
+    category: "exquisite_desserts",
     name: "سوفليه الشوكولاتة الداكنة 70%",
     description: "سوفليه دافئ ومخبوز طازجاً بشوكولاتة فالرونا البلجيكية 70%، يقدم مع آيس كريم الفانيليا الطبيعي من مدغشقر.",
     price: 75,
@@ -198,8 +165,8 @@ const menuData = [
     chefRecommended: false
   },
   {
-    id: 19,
-    category: "desserts",
+    id: 16,
+    category: "exquisite_desserts",
     name: "بقلاوة الفستق الحلبي مع الآيس كريم",
     description: "طبقات مقرمشة من رقائق الفيلو، محشوة بالفستق الحلبي الفاخر المطحون، تسقى بالقطر المعطر بماء الورد، وتقدم مع الآيس كريم التركي التقليدي.",
     price: 65,
@@ -209,8 +176,8 @@ const menuData = [
     chefRecommended: true
   },
   {
-    id: 20,
-    category: "hot_drinks",
+    id: 17,
+    category: "premium_drinks",
     name: "دلة القهوة السعودية الملكية",
     description: "قهوة سعودية شقراء فاخرة محضرة من حبوب البن الخولاني الممتازة، ممزوجة بالهيل الفاخر والزعفران الأصيل، تقدم مع تمر خلاص الفاخر.",
     price: 55,
@@ -220,8 +187,8 @@ const menuData = [
     chefRecommended: true
   },
   {
-    id: 21,
-    category: "hot_drinks",
+    id: 18,
+    category: "premium_drinks",
     name: "إسبريسو ماكياتو بلمسة برونزية",
     description: "شوت مزدوج من إسبريسو حبوب أرابيكا 100% المحمصة محلياً، مع رغوة حليب مخملية ولمسة من بودرة الذهب البرونزية.",
     price: 35,
@@ -231,8 +198,8 @@ const menuData = [
     chefRecommended: false
   },
   {
-    id: 22,
-    category: "cold_drinks",
+    id: 19,
+    category: "premium_drinks",
     name: "عصير الرمان البري والورد المبرد",
     description: "عصير الرمان الطازج البارد الممزوج بماء الورد الطبيعي المقطر، حبوب الرمان الطازجة ورقاقات النعناع.",
     price: 45,
@@ -242,8 +209,8 @@ const menuData = [
     chefRecommended: true
   },
   {
-    id: 23,
-    category: "cold_drinks",
+    id: 20,
+    category: "premium_drinks",
     name: "موكتيل اللافندر والأناناس الفوار",
     description: "مزيج منعش من شراب اللافندر الطبيعي، عصير الأناناس الطازج، المياه الفوارة وشرائح الليمون الأخضر.",
     price: 40,
@@ -254,7 +221,6 @@ const menuData = [
   }
 ];
 
-// Export to window if not standard ES Module environment
 if (typeof window !== "undefined") {
   window.menuData = menuData;
 }

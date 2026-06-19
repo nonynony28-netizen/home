@@ -295,6 +295,15 @@ function handleAddToCart(id) {
   const qtyEl = document.getElementById(`qty-${id}`);
   if (qtyEl) qtyEl.textContent = 1;
 
+  // Cart Badge Bounce Micro-Interaction
+  const badge = document.getElementById('cart-badge');
+  if (badge) {
+    badge.classList.add('scale-125', 'bg-amber-400', 'text-black');
+    setTimeout(() => {
+      badge.classList.remove('scale-125', 'bg-amber-400', 'text-black');
+    }, 300);
+  }
+
   // Visual success feedback
   showFloatingNotification(`تمت إضافة ${item.name} إلى السلة`);
 }
@@ -509,15 +518,11 @@ function openZoomModal(id) {
   
   currentZoomedId = id;
   zoomImage.src = item.image;
-  zoomCategory.textContent = item.category === 'appetizers' ? 'المقبلات' :
-                             item.category === 'salads' ? 'السلطات' :
-                             item.category === 'mains' ? 'الأطباق الرئيسية' :
-                             item.category === 'grills' ? 'المشويات' :
-                             item.category === 'seafood' ? 'المأكولات البحرية' :
-                             item.category === 'pizza' ? 'البيتزا' :
-                             item.category === 'burgers' ? 'البرجر' :
-                             item.category === 'desserts' ? 'الحلويات' :
-                             item.category === 'hot_drinks' ? 'المشروبات الساخنة' : 'المشروبات الباردة';
+  zoomCategory.textContent = item.category === 'signature_appetizers' ? 'المقبلات الفاخرة' :
+                             item.category === 'main_masterpieces' ? 'الأطباق الرئيسية' :
+                             item.category === 'from_the_grill' ? 'من الشواية' :
+                             item.category === 'ocean_delicacies' ? 'المأكولات البحرية' :
+                             item.category === 'exquisite_desserts' ? 'الحلويات الراقية' : 'المشروبات الفاخرة';
   
   zoomTitle.textContent = item.name;
   zoomDesc.textContent = item.description;
